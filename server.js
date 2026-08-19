@@ -5,6 +5,7 @@ const app = express();
 const PORT = 5000;
 
 app.use(express.json());
+app.use(express.static("public"));
 
 const sanitizeText = (value) => {
   return xss(String(value).trim());
@@ -41,7 +42,12 @@ app.get("/", (req, res) => {
     message: "Secure Case Reference API is running"
   });
 });
-
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "API is healthy"
+  });
+});
 // GET all cases
 app.get("/api/cases", (req, res) => {
   if (cases.length === 0) {
@@ -203,7 +209,12 @@ app.use((err, req, res, next) => {
     });
   }
 
-  next(err);
+  console.error(err);
+
+  res.status(500).json({
+    success: false,
+    message: "Internal server error"
+  });
 });
 
 // Handle unknown routes
@@ -213,6 +224,7 @@ app.use((req, res) => {
     message: "Route not found"
   });
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

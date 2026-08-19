@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Case Reference Lookup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="container">
+    <section class="card" aria-labelledby="page-title">
+      <h1 id="page-title">Secure Case Reference Lookup</h1>
+
+      <p class="description">
+        Search for a case using its secure reference number.
+      </p>
+
+      <form id="lookup-form">
+        <div class="form-group">
+          <label for="reference">Case Reference</label>
+
+          <input
+            type="text"
+            id="reference"
+            name="reference"
+            placeholder="Example: CASE-1001"
+            aria-describedby="reference-error"
+            autocomplete="off"
+            required
+          >
+
+          <p
+            id="reference-error"
+            class="error-message"
+            role="alert"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <button type="submit" id="lookup-button">
+          Look Up Case
+        </button>
+      </form>
+
+      <div
+        id="loading"
+        class="loading hidden"
+        role="status"
+        aria-live="polite"
+      >
+        Loading...
+      </div>
+
+      <div
+        id="result"
+        class="result"
+        aria-live="polite"
+      ></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
