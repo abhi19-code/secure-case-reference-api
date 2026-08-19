@@ -1,11 +1,23 @@
 const express = require("express");
 const xss = require("xss");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/app", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Secure Case Reference API is running"
+  });
+});
 
 const sanitizeText = (value) => {
   return xss(String(value).trim());
@@ -220,6 +232,10 @@ app.use((req, res) => {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
