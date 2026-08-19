@@ -1,65 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secure Case Reference Lookup</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Secure Case Reference Lookup application"
+    />
+    <title>Secure Case Reference Lookup</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-  <main class="container">
-    <section class="card" aria-labelledby="page-title">
-      <h1 id="page-title">Secure Case Reference Lookup</h1>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <p class="site-name">Secure Case Lookup</p>
+      </div>
+    </header>
 
-      <p class="description">
-        Search for a case using its secure reference number.
-      </p>
+    <main class="container">
+      <section class="card" aria-labelledby="page-title">
+        <h1 id="page-title">Secure Case Reference Lookup</h1>
 
-      <form id="lookup-form">
-        <div class="form-group">
-          <label for="reference">Case Reference</label>
+        <p class="description">
+          Search for a case using its secure reference number.
+        </p>
 
-          <input
-            type="text"
-            id="reference"
-            name="reference"
-            placeholder="Example: CASE-1001"
-            aria-describedby="reference-error"
-            autocomplete="off"
-            required
-          >
+        <form id="lookup-form" novalidate>
+          <div class="form-group">
+            <label for="reference">Case Reference</label>
 
-          <p
-            id="reference-error"
-            class="error-message"
-            role="alert"
-            aria-live="polite"
-          ></p>
+            <input
+              type="text"
+              id="reference"
+              name="reference"
+              placeholder="Example: CASE-1001"
+              aria-describedby="reference-help reference-error"
+              aria-invalid="false"
+              autocomplete="off"
+              required
+            />
+
+            <p id="reference-help" class="help-text">
+              Enter a case reference such as CASE-1001.
+            </p>
+
+            <p
+              id="reference-error"
+              class="error-message"
+              role="alert"
+              aria-live="assertive"
+            ></p>
+          </div>
+
+          <button type="submit" id="lookup-button">Look Up Case</button>
+        </form>
+
+        <div
+          id="loading"
+          class="loading hidden"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          Looking up case...
         </div>
 
-        <button type="submit" id="lookup-button">
-          Look Up Case
-        </button>
-      </form>
+        <div
+          id="result"
+          class="result"
+          tabindex="-1"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
+      </section>
+    </main>
 
-      <div
-        id="loading"
-        class="loading hidden"
-        role="status"
-        aria-live="polite"
-      >
-        Loading...
+    <footer class="site-footer">
+      <div class="container">
+        <p>Secure Case Reference Lookup API</p>
       </div>
+    </footer>
 
-      <div
-        id="result"
-        class="result"
-        aria-live="polite"
-      ></div>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

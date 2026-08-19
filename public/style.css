@@ -2,23 +2,40 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f2f2f2;
   color: #222;
+  line-height: 1.5;
 }
 
 .container {
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 20px;
+}
+
+.site-header {
+  background: #222;
+  color: #fff;
+}
+
+.site-name {
+  margin: 0;
+  padding: 16px 0;
+  font-weight: bold;
 }
 
 .card {
-  background: #ffffff;
-  border: 1px solid #d6d6d6;
+  margin-top: 30px;
+  background: #fff;
+  border: 1px solid #d0d0d0;
   border-radius: 8px;
   padding: 32px;
 }
@@ -27,9 +44,11 @@ h1 {
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 28px;
+  line-height: 1.2;
 }
 
 .description {
+  margin-top: 0;
   margin-bottom: 30px;
   color: #555;
 }
@@ -46,9 +65,12 @@ label {
 
 input {
   width: 100%;
+  min-height: 48px;
   padding: 12px;
-  border: 1px solid #999;
+  border: 1px solid #777;
   border-radius: 4px;
+  background: #fff;
+  color: #222;
   font-size: 16px;
 }
 
@@ -57,14 +79,34 @@ input:focus {
   outline-offset: 2px;
 }
 
+input.input-error {
+  border: 3px solid #b00020;
+}
+
+.help-text {
+  margin: 6px 0 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.error-message {
+  min-height: 22px;
+  margin: 6px 0 0;
+  color: #b00020;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 button {
   width: 100%;
+  min-height: 48px;
   padding: 12px;
   border: none;
   border-radius: 4px;
   background: #222;
-  color: #ffffff;
+  color: #fff;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -82,23 +124,14 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.error-message {
-  min-height: 20px;
-  margin: 6px 0 0;
-  color: #b00020;
-  font-size: 14px;
-}
-
-.input-error {
-  border: 2px solid #b00020;
-}
-
 .loading {
   margin-top: 20px;
   padding: 15px;
-  background: #eeeeee;
+  border: 1px solid #aaa;
   border-radius: 4px;
+  background: #eee;
   text-align: center;
+  font-weight: bold;
 }
 
 .result {
@@ -107,7 +140,7 @@ button:disabled {
 
 .result-card {
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
   border-radius: 6px;
   background: #fafafa;
 }
@@ -116,22 +149,36 @@ button:disabled {
   margin-top: 0;
 }
 
+.result-card p {
+  margin: 8px 0;
+}
+
 .no-data {
   padding: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
+  border-radius: 4px;
   background: #f5f5f5;
+  font-weight: bold;
 }
 
 .hidden {
   display: none;
 }
 
+.site-footer {
+  margin-top: 30px;
+  color: #555;
+  text-align: center;
+  font-size: 14px;
+}
+
 @media (max-width: 600px) {
   .container {
-    padding: 20px 12px;
+    padding: 15px;
   }
 
   .card {
+    margin-top: 20px;
     padding: 22px;
   }
 

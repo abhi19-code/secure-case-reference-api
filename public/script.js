@@ -19,38 +19,49 @@ form.addEventListener("submit", async (event) => {
 
   setLoading(true);
 
+try {
+  const response = await fetch(
+    `/api/cases/${encodeURIComponent(reference)}`
+  );
+
+  let data;
+
   try {
-    const response = await fetch(
-      `/api/cases/${encodeURIComponent(reference)}`
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      showResult(data.message || "No data found");
-      return;
-    }
-
-    showCase(data.data);
-
-    console.log(
-      "[Analytics] User interacted with Secure Case Reference Lookup API"
-    );
+    data = await response.json();
   } catch (error) {
-    showResult("Unable to connect to the server. Please try again.");
-  } finally {
-    setLoading(false);
+    data = {
+      message: "The server returned an invalid response."
+    };
   }
+
+  if (!response.ok) {
+    showResult(data.message || "No data found");
+    return;
+  }
+
+  showCase(data.data);
+
+  console.log(
+    "[Analytics] User interacted with Secure Case Reference Lookup API"
+  );
+} catch (error) {
+  showResult(
+    "Unable to connect to the server. Please try again."
+  );
+} finally {
+  setLoading(false);
+} 
 });
 
 function showCase(caseData) {
   result.innerHTML = "";
 
+  const heading = document.createElement("h2");
+  heading.id = "result-title";
+  heading.textContent = "Case Found";
+
   const card = document.createElement("div");
   card.className = "result-card";
-
-  const heading = document.createElement("h2");
-  heading.textContent = "Case Found";
 
   const reference = document.createElement("p");
   reference.textContent = `Reference: ${caseData.reference}`;
@@ -67,34 +78,48 @@ function showCase(caseData) {
   card.appendChild(status);
 
   result.appendChild(card);
+
+  result.focus();
 }
 
 function showResult(message) {
   result.innerHTML = "";
 
+  const heading = document.createElement("h2");
+  heading.id = "result-title";
+  heading.textContent = "Lookup Result";
+
   const messageElement = document.createElement("div");
   messageElement.className = "no-data";
   messageElement.textContent = message;
 
+  result.appendChild(heading);
   result.appendChild(messageElement);
+
+  result.focus();
 }
 
 function showError(message) {
   referenceError.textContent = message;
+
   referenceInput.classList.add("input-error");
   referenceInput.setAttribute("aria-invalid", "true");
+
   referenceInput.focus();
 }
 
 function clearMessages() {
   referenceError.textContent = "";
+
   referenceInput.classList.remove("input-error");
-  referenceInput.removeAttribute("aria-invalid");
+  referenceInput.setAttribute("aria-invalid", "false");
+
   result.innerHTML = "";
 }
 
 function setLoading(isLoading) {
   loading.classList.toggle("hidden", !isLoading);
+
   lookupButton.disabled = isLoading;
   referenceInput.disabled = isLoading;
 
