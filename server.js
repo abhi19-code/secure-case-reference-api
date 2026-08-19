@@ -35,13 +35,7 @@ const cases = [
   }
 ];
 
-// Home route
-app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "Secure Case Reference API is running"
-  });
-});
+
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
